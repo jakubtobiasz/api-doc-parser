@@ -1,6 +1,6 @@
 {
-  "name": "@api-platform/api-doc-parser",
-  "version": "0.15.9",
+  "name": "@alphpaca/api-doc-parser",
+  "version": "0.1.0",
   "description": "Transform an API documentation (Hydra, OpenAPI, GraphQL) in an intermediate representation that can be used for various tasks such as creating smart API clients, scaffolding code or building administration interfaces.",
   "files": [
     "*.md",
@@ -10,9 +10,14 @@
   "type": "module",
   "exports": "./lib/index.js",
   "main": "./lib/index.js",
-  "repository": "api-platform/api-doc-parser",
-  "homepage": "https://github.com/api-platform/api-doc-parser",
-  "bugs": "https://github.com/api-platform/api-doc-parser/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakubtobiasz/api-doc-parser.git"
+  },
+  "homepage": "https://github.com/jakubtobiasz/api-doc-parser",
+  "bugs": {
+    "url": "https://github.com/jakubtobiasz/api-doc-parser/issues"
+  },
   "author": "Kévin Dunglas",
   "license": "MIT",
   "devDependencies": {
@@ -56,5 +61,9 @@
   "sideEffects": false,
   "publishConfig": {
     "access": "public"
+  },
+  "types": "./lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
   }
 }

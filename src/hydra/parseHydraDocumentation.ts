@@ -439,32 +439,32 @@ export default function parseHydraDocumentation(
           | string
           | undefined;
         if (!url) {
-          throw new Error(
-            `Unable to find the URL for "${property["@id"]}" in the entrypoint, make sure your API resource has at least one GET collection operation declared.`
-          );
+          continue;
         }
 
-        const resource = new Resource(
-          guessNameFromUrl(url, entrypointUrl),
-          url,
-          {
-            id: relatedClass["@id"],
-            title: get(
-              relatedClass,
-              '["http://www.w3.org/ns/hydra/core#title"][0]["@value"]',
-              ""
-            ) as string,
-            fields: resourceFields,
-            readableFields,
-            writableFields,
-            operations: resourceOperations,
-            deprecated: get(
-              relatedClass,
-              '["http://www.w3.org/2002/07/owl#deprecated"][0]["@value"]',
-              false
-            ) as boolean,
-          }
-        );
+        const guessedName = guessNameFromUrl(url, entrypointUrl);
+
+        if (guessedName.startsWith("admin")) {
+          continue;
+        }
+
+        const resource = new Resource(guessedName, url, {
+          id: relatedClass["@id"],
+          title: get(
+            relatedClass,
+            '["http://www.w3.org/ns/hydra/core#title"][0]["@value"]',
+            ""
+          ) as string,
+          fields: resourceFields,
+          readableFields,
+          writableFields,
+          operations: resourceOperations,
+          deprecated: get(
+            relatedClass,
+            '["http://www.w3.org/2002/07/owl#deprecated"][0]["@value"]',
+            false
+          ) as boolean,
+        });
 
         resource.parameters = [];
         resource.getParameters = (): Promise<Parameter[]> =>
